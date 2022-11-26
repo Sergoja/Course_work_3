@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from utils import get_comments_by_post_id, get_posts_all
+from flask import Flask, render_template, request
+from utils import get_comments_by_post_id, get_posts_all, search_for_posts, get_posts_by_user
 
 app = Flask(__name__)
 
@@ -23,12 +23,19 @@ def post_page(post_id):
 
 @app.route('/search')
 def search_page():
-    return render_template('search.html')
+    word_search = request.args['word_search']
+    find_posts = search_for_posts(word_search)
+    return render_template('search.html', find_posts=find_posts, word_search=word_search)
 
 
-@app.route('/user-feed')
-def user_feed_page():
-    return render_template('user-feed.html')
+@app.route('/users/<username>')
+def user_feed_page(username):
+    posts_user = get_posts_by_user(username)
+    return render_template('user-feed.html', posts_user=posts_user)
 
+
+# @app.route('/<non_page>')
+# def error_page(non_page):
+#
 
 app.run()
