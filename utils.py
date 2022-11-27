@@ -31,11 +31,7 @@ def get_posts_by_user(user_name):
     return posts_by_user
 
 
-# get_posts_by_user(user_name) – возвращает посты определенного пользователя.
-# Функция должна вызывать ошибку ValueError если такого пользователя нет и пустой список,
-# если у пользователя нет постов.
-
-# get_comments_by_post_id(post_id) – возвращает комментарии определенного поста.
-# Функция должна вызывать ошибку ValueError если такого поста нет и пустой список, если у поста нет комментов.
-
-# get_post_by_pk(pk) – возвращает один пост по его идентификатору.
+def get_post_by_pk(pk):
+    for post in get_posts_all():
+        if int(pk) == post['pk']:
+            return post
