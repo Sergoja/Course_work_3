@@ -1,3 +1,4 @@
+import werkzeug
 from flask import Flask, render_template, request
 from utils import get_comments_by_post_id, get_posts_all, search_for_posts, get_posts_by_user
 
@@ -34,6 +35,10 @@ def user_feed_page(username):
     return render_template('user-feed.html', posts_user=posts_user)
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
 # @app.route('/<non_page>')
 # def error_page(non_page):
 #
