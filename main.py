@@ -72,4 +72,5 @@ def take_json_list_by_id(post_id):
     return get_post_by_pk(post_id)
 
 
-app.run()
+if __name__ == "__main__":
+    app.run()
