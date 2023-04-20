@@ -43,12 +43,11 @@ def search_page():
 @app.route('/users/<username>')
 def user_feed_page(username):
     posts_user = get_posts_by_user(username)
-    return render_template('user-feed.html', posts_user=posts_user)
+    return render_template('user-feed.html', posts_user=posts_user, user_name=username)
 
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
     return render_template('404.html'), 404
 
 

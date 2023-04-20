@@ -17,7 +17,7 @@
         </svg>
       </a>
       <a href="/" class="header__logo-link">
-        <h1 class="header__logo-text">{{ posts_user.poster_name }}</h1>
+        <h1 class="header__logo-text">{{ user_name }}</h1>
       </a>
     </div>
   </header>
@@ -40,7 +40,7 @@
         <div class="item__post-info">
           <div class="item__counter">
             <img src="../static/img/eye.png" alt="" class="item__counter-icon" width="26">
-            <span class="item__counter-text">212</span>
+            <span class="item__counter-text">{{ post.views_count }}</span>
           </div>
         </div>
         <div class="item__post-bottom">
