@@ -7,6 +7,8 @@ from utils import get_comments_by_post_id, get_posts_all, search_for_posts, get_
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
+app.config.from_pyfile("deafult_config.py")
+app.config.from_envvar("APP_SETTINGS", silent=True)
 logging.basicConfig(filename="api.log", level=logging.INFO)
 console_handler = logging.StreamHandler()
 formatter_one = logging.Formatter("%(asctime)s : %(levelname)s : %(message)s")
