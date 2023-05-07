@@ -1,13 +1,16 @@
 import logging
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from sqlalchemy import text
 from werkzeug.exceptions import HTTPException
 
+from db import db
 from utils import get_comments_by_post_id, get_posts_all, search_for_posts, get_posts_by_user, get_post_by_pk
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config.from_pyfile("deafult_config.py")
+db.init_app(app)
 app.config.from_envvar("APP_SETTINGS", silent=True)
 logging.basicConfig(filename="api.log", level=logging.INFO)
 console_handler = logging.StreamHandler()
@@ -71,6 +74,21 @@ def take_json_list():
 def take_json_list_by_id(post_id):
     api_logging.info(f'Запрос /api/posts/{post_id}')
     return get_post_by_pk(post_id)
+
+
+@app.route('/test_db', methods=['GET'])
+def test_db():
+    result = db.session.execute(
+        text(
+            'SELECT 1'
+        )
+    ).scalar()
+
+    return jsonify(
+        {
+            'result': result,
+        }
+    )
 
 
 if __name__ == "__main__":
